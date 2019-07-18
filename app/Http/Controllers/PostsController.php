@@ -2,15 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Post;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
     public function index(){
-        return view('posts.index');
+
+        $posts = Post::all();
+
+        return view('posts.index')->with(['posts'=>$posts]);
     }
 
-    public function show($id){
-        return view('posts.show');
+    public function show(Post $post){
+
+        /*$post = Post::find($postId);
+
+        if(is_null($post)){
+            abort(404);
+        }*/
+        return view('posts.show')->with(['post'=>$post]);
     }
 }
