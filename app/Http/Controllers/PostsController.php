@@ -27,11 +27,19 @@ class PostsController extends Controller
 
 
     public function edit(Post $post){
+
+        //dd($post);
+
         return view('posts.edit')->with(['post'=>$post]);
     }
 
 
     public function update(Post $post , Request $request){
+        $this->validate($request,[
+            'title'=>'required',
+            'url'=>'required|url',
+        ]);
+
         $post->update(
             $request->only('title','description','url')
         );
@@ -40,7 +48,15 @@ class PostsController extends Controller
     }
 
     public function create(){
-        return view('posts.create');
+
+        $post = new Post;
+        return view('posts.create')->with(['post'=>$post]);
+    }
+
+
+    public function delete(Post $post){
+        $post->delete();
+        return redirect()->route('posts_path');
     }
 
 

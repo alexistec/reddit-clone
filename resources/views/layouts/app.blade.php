@@ -15,6 +15,7 @@
             </div>
         </div>
         <hr>
+        @include('layouts._errors')
         @yield('content')
     </div>
 </body>
