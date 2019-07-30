@@ -43,19 +43,21 @@ class PostsController extends Controller
         $post->update(
             $request->only('title','description','url')
         );
-
+        session()->flash('message','Post update !');
         return redirect()->route('post_path',['post'=>$post->id]);
     }
 
     public function create(){
 
         $post = new Post;
+        
         return view('posts.create')->with(['post'=>$post]);
     }
 
 
     public function delete(Post $post){
         $post->delete();
+        session()->flash('message','Post delete !');
         return redirect()->route('posts_path');
     }
 
@@ -73,6 +75,8 @@ class PostsController extends Controller
         $post->url = $request->get('url');
         $post->save();
         
+
+        session()->flash('message','Post created !');
 
         return redirect()->route('posts_path');
     }

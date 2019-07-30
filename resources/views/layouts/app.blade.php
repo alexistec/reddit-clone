@@ -12,10 +12,14 @@
         <div class="row">
             <div class="col-md-12">
                 <h1>REDDIT CLONE</h1>
+                <small class="pull-right">
+                    <a href="{{route('create_post_path')}}">Create post</a>
+                </small>
             </div>
         </div>
         <hr>
         @include('layouts._errors')
+        @include('layouts._messages')
         @yield('content')
     </div>
 </body>
